@@ -14,6 +14,10 @@ In order to save cost on computing resources, it is good practice to stop non-pr
 
 ### **Lambda function details**:
 
+**IMPORTANT**: Please note that all schedule CloudWatch events use UTC time (GMT +0)
+- 23:00 UTC = 19:00 EST
+- 12:50 UTC = 08:50 EST
+
 ![App Screenshot](https://1.bp.blogspot.com/-jVo6Tx1SuSA/YUSX_PCDZDI/AAAAAAAAFqg/2UGiptIeckkeqABxcFWr2x_BdJ1T84BawCLcBGAsYHQ/s1071/Auto-StartStop-Demo-Page-2.drawio.png)
 
 ## Tested with: 

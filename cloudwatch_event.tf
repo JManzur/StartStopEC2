@@ -1,4 +1,4 @@
-# IMPORTANT: All schedule CloudWatch events use UTC time zone (GMT +0)
+# IMPORTANT: All schedule CloudWatch events use UTC time (GMT +0)
 #   23:00 UTC = 19:00 EST
 #   12:50 UTC = 08:50 EST
 
