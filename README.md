@@ -14,7 +14,7 @@ In order to save cost on computing resources, it is good practice to stop non-pr
 
 ### **Lambda function details**:
 
-![App Screenshot](https://1.bp.blogspot.com/-gYyUHEboVjM/YUSRhE8u4uI/AAAAAAAAFqU/bE1kja0cyjklCu9QK3wfzQzQAYtuaUDdACLcBGAsYHQ/s16000/Auto-StartStop-Demo-Page-2.drawio.png)
+![App Screenshot](https://1.bp.blogspot.com/-jVo6Tx1SuSA/YUSX_PCDZDI/AAAAAAAAFqg/2UGiptIeckkeqABxcFWr2x_BdJ1T84BawCLcBGAsYHQ/s1071/Auto-StartStop-Demo-Page-2.drawio.png)
 
 ## Tested with: 
 
