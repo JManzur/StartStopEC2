@@ -2,7 +2,7 @@
 
 In order to save cost on computing resources, it is good practice to stop non-production EC2 instances during non-business hours. To achieve that, this solution will implement a python lambda function triggered by a CloudWatch schedule event, the lambda function will perform a lookup on all EC2 instances of the AWS account with the tag "Auto-StartStop-Enabled" = "true", and those that match the criteria will be stop/start.
 
-![App Screenshot](https://1.bp.blogspot.com/-zSz6WfGDrhc/YUSF3E7abVI/AAAAAAAAFqI/SHy7iO8Y2-QfUrTCm3Xh-P31B3rdldhJQCLcBGAsYHQ/s16000/Auto-StartStop-Demo.drawio.png)
+![App Screenshot](https://1.bp.blogspot.com/-msEaVs4MEjI/YU3myhdrr5I/AAAAAAAAFrE/LZwzXYR4S48D1yTYnuFRc9SlV7pfbpSrwCLcBGAsYHQ/s16000/Auto-StartStop-Demo-Page-1.drawio.png)
 
 ### **Resources deployed by this manifest**:
 - Demo EC2 instance with tag "Auto-StartStop-Enabled" = "true".
