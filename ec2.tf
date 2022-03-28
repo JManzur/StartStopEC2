@@ -1,7 +1,18 @@
+#Grabbing latest Linux 2 AMI
+data "aws_ami" "linux2" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm*"]
+  }
+}
+
 # Demo EC2 Deploy
 resource "aws_instance" "demo-ec2" {
-  ami                    = var.aws_ami_id
-  instance_type          = var.instance_type
+  ami                    = data.aws_ami.linux2.id
+  instance_type          = var.instance_type["type1"]
   subnet_id              = var.private_subnet_id
   key_name               = var.key_name
   vpc_security_group_ids = [aws_security_group.allow_ssh.id]
