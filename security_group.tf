@@ -1,7 +1,7 @@
 resource "aws_security_group" "allow_ssh" {
   name        = "allow_ssh"
   description = "Allow SSH inbound traffic"
-  vpc_id      = var.main_vpc
+  vpc_id      = var.vpc_id
 
   ingress {
     description = "SSH from VPC"
@@ -11,5 +11,5 @@ resource "aws_security_group" "allow_ssh" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags = merge(var.demo-startstop, { Name = "${var.tag_project}-sg" }, )
+  tags = { Name = "${var.name-prefix}-SG" }
 }

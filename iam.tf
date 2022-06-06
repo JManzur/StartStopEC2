@@ -1,21 +1,57 @@
-# IAM Policy: Allow Lambda to Stop/Start EC2 and send Logs to CloudWatch
-resource "aws_iam_policy" "startstop_ec2_policy" {
-  name        = "startstop_ec2_policy"
-  path        = "/"
-  description = "Start/Stop EC2 using Lambda"
-  policy      = file("iam/lambda_iam_policy.json")
-  tags        = merge(var.demo-startstop, { Name = "${var.tag_project}-policy" }, )
+data "aws_iam_policy_document" "policy_source" {
+  statement {
+    sid    = "CloudWatchAccess"
+    effect = "Allow"
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ]
+    resources = ["arn:aws:logs:*:*:*"]
+  }
+
+  statement {
+    sid    = "StartStopEC2"
+    effect = "Allow"
+    actions = [
+      "ec2:DescribeInstances",
+      "ec2:Start*",
+      "ec2:Stop*"
+    ]
+    resources = ["*"]
+  }
 }
 
-# IAM Role: Lambda execution role
-resource "aws_iam_role" "startstop_ec2_policy_role" {
-  name               = "startstop_ec2_policy_role"
-  assume_role_policy = file("iam/lambda_iam_role.json")
-  tags               = merge(var.demo-startstop, { Name = "${var.tag_project}-role" }, )
+data "aws_iam_policy_document" "role_source" {
+  statement {
+    sid    = "LambdaAssumeRole"
+    effect = "Allow"
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+    actions = ["sts:AssumeRole"]
+  }
+}
+
+# IAM Policy
+resource "aws_iam_policy" "policy" {
+  name        = "StartStopEC2_policy"
+  path        = "/"
+  description = "StartStopEC2 Policy"
+  policy      = data.aws_iam_policy_document.policy_source.json
+  tags        = { Name = "${var.name-prefix}-policy" }
+}
+
+# IAM Role (Lambda execution role)
+resource "aws_iam_role" "role" {
+  name               = "StartStopEC2_policy_role"
+  assume_role_policy = data.aws_iam_policy_document.role_source.json
+  tags               = { Name = "${var.name-prefix}-role" }
 }
 
 # Attach Role and Policy
-resource "aws_iam_role_policy_attachment" "startstop_ec2_attach" {
-  role       = aws_iam_role.startstop_ec2_policy_role.name
-  policy_arn = aws_iam_policy.startstop_ec2_policy.arn
+resource "aws_iam_role_policy_attachment" "attach" {
+  role       = aws_iam_role.role.name
+  policy_arn = aws_iam_policy.policy.arn
 }

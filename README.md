@@ -2,7 +2,9 @@
 
 In order to save cost on computing resources, it is good practice to stop non-production EC2 instances during non-business hours. To achieve that, this solution will implement a python lambda function triggered by a CloudWatch schedule event, the lambda function will perform a lookup on all EC2 instances of the AWS account with the tag "Auto-StartStop-Enabled" = "true", and those that match the criteria will be stop/start.
 
-![App Screenshot](https://1.bp.blogspot.com/-msEaVs4MEjI/YU3myhdrr5I/AAAAAAAAFrE/LZwzXYR4S48D1yTYnuFRc9SlV7pfbpSrwCLcBGAsYHQ/s16000/Auto-StartStop-Demo-Page-1.drawio.png)
+> :bulb: Are you interested in the same type of solution for RDS? check [this repo](https://github.com/JManzur/StartStopRDS)
+
+![App Screenshot](images/Auto-StartStop-Demo-EC2.drawio.png)
 
 ### **Resources deployed by this manifest**:
 - Demo EC2 instance with tag "Auto-StartStop-Enabled" = "true".
@@ -18,15 +20,15 @@ In order to save cost on computing resources, it is good practice to stop non-pr
 - 23:00 UTC = 19:00 EST
 - 12:50 UTC = 08:50 EST
 
-![App Screenshot](https://1.bp.blogspot.com/-jVo6Tx1SuSA/YUSX_PCDZDI/AAAAAAAAFqg/2UGiptIeckkeqABxcFWr2x_BdJ1T84BawCLcBGAsYHQ/s1071/Auto-StartStop-Demo-Page-2.drawio.png)
+![App Screenshot](images/Auto-StartStop-Demo-EC2-Lambda.drawio.png)
 
 ## Tested with: 
 
 | Environment | Application | Version  |
 | ----------------- |-----------|---------|
-| WSL2 Ubuntu 20.04 | Terraform | v1.0.6  |
-| WSL2 Ubuntu 20.04 | aws-cli | v2.2.12  |
-| Lambda Code | Python | v3.8  |
+| WSL2 Ubuntu 20.04 | Terraform | v1.2.1  |
+| WSL2 Ubuntu 20.04 | aws-cli | v2.5.3  |
+| Lambda Code | Python | v3.9  |
 
 ## Initialization How-To:
 
@@ -40,6 +42,8 @@ terraform init
 ## Deployment How-To:
 
 Located in the root directory, make the necessary changes in the variables.tf file and run the manifests:
+
+> :warning: Since this is just a demo, all CloudWatch events are disabled, to enable it, change the variable "enable_event_rules" to "true" (without quotes)
 
 ```bash
 terraform apply
@@ -65,8 +69,9 @@ Stop test:
 
 ## Author:
 
-- [@jmanzur](https://github.com/JManzur)
+- [@jmanzur](https://jmanzur.com/)
 
 ## Documentation:
 
 - [AWS Official Approach](https://aws.amazon.com/es/premiumsupport/knowledge-center/start-stop-lambda-cloudwatch/)
+- [Python SDK documentation for EC2](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ec2.html)

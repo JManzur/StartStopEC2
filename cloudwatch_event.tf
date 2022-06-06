@@ -7,7 +7,7 @@ resource "aws_cloudwatch_event_rule" "auto-stop-ec2-mon-fri" {
   name                = "auto-stop-ec2-mon-fri"
   description         = "Auto Stop EC2 at 19:00 EST Monday to Friday"
   schedule_expression = "cron(0 23 ? * MON-FRI *)"
-  is_enabled          = true
+  is_enabled          = false
 }
 
 resource "aws_cloudwatch_event_target" "lambda_stop_target" {

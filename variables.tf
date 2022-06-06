@@ -1,13 +1,31 @@
-# AWS Region: North of Virginia
 variable "aws_region" {
   type    = string
   default = "us-east-1"
 }
 
-# SSH Key-Pair 
+variable "aws_profile" {
+  type    = string
+  default = ""
+}
+
 variable "key_name" {
   type    = string
-  default = "jmanzur"
+  default = ""
+}
+
+variable "vpc_id" {
+  type    = string
+  default = ""
+}
+
+variable "private_subnet_id" {
+  type    = string
+  default = ""
+}
+
+variable "enable_event_rules" {
+  type    = bool
+  default = false
 }
 
 /* EC2 Instance type */
@@ -21,30 +39,19 @@ variable "instance_type" {
   }
 }
 
-# Main VPC
-variable "main_vpc" {
-  type    = string
-  default = "vpc-1c6c1766"
-}
-
-# Main Subnet
-variable "private_subnet_id" {
-  type    = string
-  default = "subnet-0a9b22433e6dc9df9"
-}
-
-### Tags Variables ###
-
-variable "demo-startstop" {
+/* Tags Variables */
+#Use: tags = merge(var.project-tags, { Name = "${var.resource-name-tag}-place-holder" }, )
+variable "project-tags" {
   type = map(string)
   default = {
-    service     = "Auto-StartStop-Demo",
-    environment = "demo"
-    owner       = "example@mail.com"
+    service     = "Auto-StartStop-EC2",
+    environment = "POC"
+    DeployedBy  = "example@mail.com"
   }
 }
 
-variable "tag_project" {
+#Use: tags = { Name = "${var.name-prefix}-lambda" }
+variable "name-prefix" {
   type    = string
-  default = "auto-startstop-demo"
+  default = "StartStopEC2"
 }
