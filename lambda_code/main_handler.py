@@ -49,7 +49,6 @@ def lambda_handler(event, context):
                 else:
                     logger.warning("The status of the instance {} is not right to start or stop".format(InstanceId))
 
-
     except ClientError as error:
         logger.error(error)
         return {
